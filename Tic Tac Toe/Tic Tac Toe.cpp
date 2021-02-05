@@ -73,12 +73,36 @@ public:
 		tickCell();
 		if (board[width - 1][3 - height] == 0) {
 			board[width - 1][3 - height] = playersTags[checkTurn];
-			if (checkTurn) checkTurn = false;
-			else checkTurn = true;
+			
 		}
 		else markCell();
 	}
+	void check() {
+		if ((board[0][0] == playersTags[checkTurn] && board[0][1] == playersTags[checkTurn] && board[0][2] == playersTags[checkTurn]) ||
+			(board[1][0] == playersTags[checkTurn] && board[1][1] == playersTags[checkTurn] && board[1][2] == playersTags[checkTurn]) ||
+			(board[2][0] == playersTags[checkTurn] && board[2][1] == playersTags[checkTurn] && board[2][2] == playersTags[checkTurn]) ||
+			(board[0][0] == playersTags[checkTurn] && board[1][0] == playersTags[checkTurn] && board[2][0] == playersTags[checkTurn]) ||
+			(board[1][0] == playersTags[checkTurn] && board[1][1] == playersTags[checkTurn] && board[1][2] == playersTags[checkTurn]) ||
+			(board[2][0] == playersTags[checkTurn] && board[2][1] == playersTags[checkTurn] && board[2][2] == playersTags[checkTurn]) ||
+			(board[0][0] == playersTags[checkTurn] && board[1][1] == playersTags[checkTurn] && board[2][2] == playersTags[checkTurn]) ||
+			(board[0][2] == playersTags[checkTurn] && board[1][1] == playersTags[checkTurn] && board[2][0] == playersTags[checkTurn]))
+		
+		{
 
+			system("cls");
+			cout << playersNames[checkTurn] << " won\nPress any key to play again";
+			_getch();
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					board[i][j] = 0;
+				}
+			}
+		}
+		if (checkTurn) checkTurn = false;
+		else checkTurn = true;
+	}
+
+	
 };
 
 
@@ -89,6 +113,8 @@ int main() {
 	do {
 		expampleObj.showBoard();
 		expampleObj.markCell();
+		expampleObj.check();
+
 	} while (true);
 
 
